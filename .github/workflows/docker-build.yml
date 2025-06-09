@@ -1,15 +1,21 @@
 name: Docker Build
 
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
+    inputs:
+      image_name:
+        description: 'Docker image name'
+        required: true
+        type: string
+      dockerfile_path:
+        description: 'Path to Dockerfile'
+        required: false
+        default: './Dockerfile'
+        type: string
 
 jobs:
   docker:
     uses: AmanjotSinghSaini-int/ci-templates/.github/workflows/docker-build.yml@main
     with:
-      image_name: ghcr.io/my-org/my-app:latest
-      dockerfile_path: ./Dockerfile
-      context: .
-      build_args: "--no-cache"
+      image_name: ${{ inputs.image_name }}
+      dockerfile_path: ${{ inputs.dockerfile_path }}
