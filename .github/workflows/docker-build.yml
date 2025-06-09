@@ -1,0 +1,15 @@
+name: Docker Build
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  docker:
+    uses: AmanjotSinghSaini-int/ci-templates/.github/workflows/docker-build.yml@main
+    with:
+      image_name: ghcr.io/my-org/my-app:latest
+      dockerfile_path: ./Dockerfile
+      context: .
+      build_args: "--no-cache"
