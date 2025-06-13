@@ -14,5 +14,5 @@ jobs:
       context: .
       build_args: "--no-cache"
       run_trivy: false        
-      run_gitleaks: true  
-      run_owasp: false 
+      run_gitleaks: false  
+      run_owasp: true 
