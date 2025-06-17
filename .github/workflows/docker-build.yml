@@ -13,8 +13,8 @@ jobs:
       dockerfile_path: ./Dockerfile
       context: .
       build_args: "--no-cache"
-      run_trivy: false        
-      run_gitleaks: false  
+      run_trivy: true        
+      run_gitleaks: true  
       run_owasp: true
       
       
