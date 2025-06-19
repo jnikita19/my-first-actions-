@@ -7,6 +7,12 @@ on:
 
 jobs:
   docker:
+    permissions:
+      contents: read
+      packages: write
+      secrets: read  # Required for passing secrets
+      security-events: write  # For security scans
+
     uses: AmanjotSinghSaini-int/ci-templates/.github/workflows/docker-build.yml@main
     with:
       image_name: ghcr.io/my-org/my-app:latest
@@ -19,7 +25,8 @@ jobs:
       continue_on_gitleaks_error: true
       run_owasp: true
       continue_on_owasp_error: false
-    secrets:  
+    
+    # MUST HAVE: Pass secrets to reusable workflow
+    secrets:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-      
-      
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed for commit details
