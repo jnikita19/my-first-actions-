@@ -19,5 +19,7 @@ jobs:
       continue_on_gitleaks_error: true
       run_owasp: true
       continue_on_owasp_error: false
+    secrets:  
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
       
       
