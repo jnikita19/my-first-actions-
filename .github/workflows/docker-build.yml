@@ -6,6 +6,17 @@ on:
   workflow_dispatch:
 
 jobs:
+  notify-start:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify Slack - Build Starting
+        uses: act10ns/slack@v1
+        with:
+          status: starting
+          channel: "#github-actions-notification"
+          message: "🚀 Starting Docker build for `ghcr.io/my-org/my-app:latest`"
+          webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          
   docker:
     uses: AmanjotSinghSaini-int/ci-templates/.github/workflows/docker-build.yml@main
     with:
