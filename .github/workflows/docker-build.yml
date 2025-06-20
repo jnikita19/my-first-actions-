@@ -9,6 +9,8 @@ jobs:
           
   docker:
     uses: AmanjotSinghSaini-int/ci-templates/.github/workflows/docker-build.yml@main
+    secrets:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
     with:
       image_name: ghcr.io/my-org/my-app:latest
       dockerfile_path: ./Dockerfile
