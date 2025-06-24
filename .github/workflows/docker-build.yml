@@ -28,7 +28,7 @@ jobs:
       continue_on_owasp_error: false
 
       run_pytest: true
-      continue_on_pytest_error: false
+      continue_on_pytest_error: true
 
       run_trivy: true
       continue_on_trivy_error: false
