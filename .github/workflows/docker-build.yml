@@ -14,6 +14,7 @@ jobs:
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_REGION: ${{ secrets.AWS_REGION }}
       AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     with:
       image_name: ghcr.io/my-org/my-app:latest
       dockerfile_path: ./Dockerfile
@@ -35,3 +36,8 @@ jobs:
 
       push_to_ecr: true
       ecr_repository: image-from-github
+
+      run_sonar: true
+      sonar_host_url: http://13.232.206.99:9000
+      sonar_project_key: sonar
+      sonar_project_name: sonar
