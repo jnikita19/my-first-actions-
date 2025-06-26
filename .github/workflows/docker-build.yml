@@ -34,6 +34,9 @@ jobs:
       run_trivy: true
       continue_on_trivy_error: false
 
+      image_size_threshold_mb: 30        
+      continue_on_size_check_error: false 
+
       push_to_ecr: true
       ecr_repository: image-from-github
 
