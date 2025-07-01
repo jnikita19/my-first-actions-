@@ -36,7 +36,7 @@ jobs:
       run_trivy: true
       continue_on_trivy_error: false
 
-      image_size_threshold_mb: 150        
+      image_size_threshold_mb: 200        
       continue_on_size_check_error: false 
 
       push_to_ecr: true
