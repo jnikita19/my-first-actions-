@@ -1,0 +1,37 @@
+name: Docker CD Pipeline
+
+on:
+  workflow_dispatch:
+
+jobs:
+  fetch-ecr-url:
+    name: Download image URL from CI
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download ECR image URL artifact from CI workflow
+        uses: actions/download-artifact@v4
+        with:
+          name: ecr-image-url
+          path: ./artifact
+
+      - name: Read ECR image URL
+        id: read-url
+        run: |
+          IMAGE_URL=$(cat ./artifact/image-url.txt)
+          echo "image_url=$IMAGE_URL" >> $GITHUB_OUTPUT
+
+  deploy:
+    name: Deploy to EKS
+    needs: fetch-ecr-url
+    uses: AmanjotSinghSaini-int/ci-templates/.github/workflows/docker-build.yml@main
+    with:
+      image_name: ghcr.io/my-org/my-app:latest  
+      run_cd: true
+      image_url: ${{ needs.fetch-ecr-url.outputs.image_url }}
+    secrets:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_REGION: ${{ secrets.AWS_REGION }}
+      AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
