@@ -9,7 +9,7 @@ on:
 
 jobs:
   build-and-scan:
-    uses: AmanjotSinghSaini-int/ci-templates/.github/workflows/docker-build.yml@main
+    uses: AmanjotSinghSaini-int/ci-templates/.github/workflows/docker-build.yml@improvement
     secrets:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
