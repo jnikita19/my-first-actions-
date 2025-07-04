@@ -14,7 +14,7 @@ on:
 
 jobs:
   deploy:
-    uses: AmanjotSinghSaini-int/ci-templates/.github/workflows/deploy-to-eks.yml@main
+    uses: AmanjotSinghSaini-int/ci-templates/.github/workflows/deploy-to-eks.yml@improvement
     with:
       image_tag: ${{ inputs.image_tag }}
       ecr_repo: 370389955750.dkr.ecr.ap-south-1.amazonaws.com/image-from-github  
