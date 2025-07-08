@@ -13,6 +13,8 @@ jobs:
       deployment_file: ./deployment.template.yaml
       #deployment_files: ./service.yaml,./ingress.yaml,./deployment.yaml  # only needed for filenames mode
       continue_on_validation_error: false
+      delete_old_images: false
+
     secrets:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
