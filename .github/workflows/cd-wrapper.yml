@@ -8,7 +8,10 @@ jobs:
     uses: AmanjotSinghSaini-int/ci-templates/.github/workflows/deploy-to-eks.yml@improvement
     with:
       ecr_repo: 370389955750.dkr.ecr.ap-south-1.amazonaws.com/image-from-github
-      eks_cluster_name: github-actions-deployment  
+      eks_cluster_name: github-actions-deployment
+      deployment_mode: singlefile              # or: filenames, recursive
+      deployment_file: ./deployment.template.yaml
+      #deployment_files: ./service.yaml,./ingress.yaml,./deployment.yaml  # only needed for filenames mode
     secrets:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
