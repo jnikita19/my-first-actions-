@@ -75,15 +75,22 @@ Before using the workflows, ensure the following:
 
 > *Only one of `deployment_file` or `deployment_files` is required, depending on the deployment mode.
 
-## Table 3: Required GitHub Secrets
+## Required GitHub Secrets
 
-| Secret Name           | Required | Description                                                          |
-|------------------------|----------|----------------------------------------------------------------------|
-| AWS_ACCESS_KEY_ID      | Yes      | AWS key for ECR and Kubernetes access                                |
-| AWS_SECRET_ACCESS_KEY  | Yes      | AWS secret for ECR and Kubernetes access                             |
-| ECR_REPO_URL           | Yes      | Full ECR repo URL where Docker images are pushed or pulled from      |
-| SLACK_WEBHOOK_URL      | No       | Slack webhook for pipeline alerts                                    |
-| SONAR_TOKEN            | No       | Token for SonarQube static code analysis (if `sonar_enabled` is true)|
+| Secret Name           | Required | Description                                                       |
+|------------------------|----------|-------------------------------------------------------------------|
+| SLACK_WEBHOOK_URL      | No       | Slack webhook URL used for sending pipeline notifications         |
+| AWS_ACCESS_KEY_ID      | Yes      | AWS access key for authenticating with ECR and EKS                |
+| AWS_SECRET_ACCESS_KEY  | Yes      | AWS secret key for ECR and EKS authentication                     |
+| AWS_REGION             | Yes      | AWS region (e.g., `ap-south-1`) where your resources are hosted    |
+| AWS_ACCOUNT_ID         | Yes      | AWS account ID used in constructing ECR repository URLs           |
+| SONAR_TOKEN            | No       | Token used to authenticate with SonarQube for static code analysis|
+
+> **Note:**  
+> `SLACK_WEBHOOK_URL` and `SONAR_TOKEN` are optional. They are only required if:
+> - `slack-enabled: true` is set in your workflow inputs (for Slack notifications), or  
+> - `run_sonar: true` is enabled (for SonarQube static analysis).  
+> If these secrets are not provided while the respective features are enabled, the pipeline may fail at runtime.
 
 
 ---
