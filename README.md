@@ -47,42 +47,42 @@ Repeat steps 4–7 for each of the secrets listed below.
 
 | Input Name                  | Required | Type     | Default         | Description                                                                 |
 |-----------------------------|----------|----------|-----------------|-----------------------------------------------------------------------------|
-| image_name                  | Yes      | string   | -               | Full image name (e.g., `ghcr.io/my-org/my-app`)                            |
-| image_tag                   | Yes      | string   | -               | Tag for the built image (e.g., `latest`, `v1.0.0`)                          |
-| dockerfile_path             | No       | string   | ./Dockerfile    | Path to the Dockerfile                                                     |
-| context                     | No       | string   | .               | Docker build context directory                                              |
-| build_args                  | No       | string   | --no-cache      | Extra arguments to pass to Docker build                                    |
-| run_gitleaks                | No       | boolean  | true            | Enable Gitleaks scan                                                       |
-| gitleaks_fetch_depth        | No       | number   | 1               | Git fetch depth for Gitleaks (**0 = all commits**, **1 = most recent**)   |
-| continue_on_gitleaks_error | No       | boolean  | false           | Whether to continue pipeline if Gitleaks scan fails                        |
-| run_owasp                   | No       | boolean  | true            | Enable OWASP dependency check                                              |
-| continue_on_owasp_error     | No       | boolean  | false           | Whether to continue pipeline if OWASP scan fails                           |
-| run_pytest                  | No       | boolean  | true            | Run tests using Pytest                                                     |
-| continue_on_pytest_error    | No       | boolean  | true            | Whether to continue pipeline if tests fail                                 |
-| run_trivy                   | No       | boolean  | true            | Enable Trivy scan for vulnerabilities                                      |
-| continue_on_trivy_error     | No       | boolean  | false           | Whether to continue pipeline if Trivy scan fails                           |
-| image_size_threshold_mb     | No       | number   | 200             | Maximum allowed image size in MB                                           |
-| continue_on_size_check_error| No       | boolean  | false           | Whether to continue pipeline if image exceeds size                         |
-| push_to_ecr                 | No       | boolean  | true            | Whether to push the image to AWS ECR                                       |
-| ecr_repository              | Yes*     | string   | -               | ECR repository name (required if `push_to_ecr` is true)                    |
-| run_sonar                   | No       | boolean  | true            | Whether to run SonarQube static analysis                                   |
-| sonar_host_url              | Yes*     | string   | -               | SonarQube server URL (required if `run_sonar` is true)                     |
-| sonar_project_key           | Yes*     | string   | -               | SonarQube project key                                                      |
-| sonar_project_name          | Yes*     | string   | -               | SonarQube project name                                                     |
-| slack-enabled               | No       | boolean  | true            | Whether to send Slack notifications                                        |
-| slack-channel               | No       | string   | "#github-actions-notification" | Slack channel to send notifications to                           |
+| `image_name`                  | Yes      | string   | -               | Full image name (e.g., `ghcr.io/my-org/my-app`)                            |
+| `image_tag`                   | Yes      | string   | -               | Tag for the built image (e.g., `latest`, `v1.0.0`)                          |
+| `dockerfile_path`             | No       | string   | ./Dockerfile    | Path to the Dockerfile                                                     |
+| `context`                     | No       | string   | .               | Docker build context directory                                              |
+| `build_args`                  | No       | string   | --no-cache      | Extra arguments to pass to Docker build                                    |
+| `run_gitleaks`                | No       | boolean  | true            | Enable Gitleaks scan                                                       |
+| `gitleaks_fetch_depth`        | No       | number   | 1               | Git fetch depth for Gitleaks (**0 = all commits**, **1 = most recent**)   |
+| `continue_on_gitleaks_error` | No       | boolean  | false           | Whether to continue pipeline if Gitleaks scan fails                        |
+| `run_owasp`                   | No       | boolean  | true            | Enable OWASP dependency check                                              |
+| `continue_on_owasp_error`     | No       | boolean  | false           | Whether to continue pipeline if OWASP scan fails                           |
+| `run_pytest`                  | No       | boolean  | true            | Run tests using Pytest                                                     |
+| `continue_on_pytest_error`    | No       | boolean  | true            | Whether to continue pipeline if tests fail                                 |
+| `run_trivy`                   | No       | boolean  | true            | Enable Trivy scan for vulnerabilities                                      |
+| `continue_on_trivy_error`     | No       | boolean  | false           | Whether to continue pipeline if Trivy scan fails                           |
+| `image_size_threshold_mb`     | No       | number   | 200             | Maximum allowed image size in MB                                           |
+| `continue_on_size_check_error`| No       | boolean  | false           | Whether to continue pipeline if image exceeds size                         |
+| `push_to_ecr`                 | No       | boolean  | true            | Whether to push the image to AWS ECR                                       |
+| `ecr_repository`              | Yes*     | string   | -               | ECR repository name (required if `push_to_ecr` is true)                    |
+| `run_sonar`                   | No       | boolean  | true            | Whether to run SonarQube static analysis                                   |
+| `sonar_host_url`              | Yes*     | string   | -               | SonarQube server URL (required if `run_sonar` is true)                     |
+| `sonar_project_key`           | Yes*     | string   | -               | SonarQube project key                                                      |
+| `sonar_project_name`          | Yes*     | string   | -               | SonarQube project name                                                     |
+| `slack-enabled`               | No       | boolean  | true            | Whether to send Slack notifications                                        |
+| `slack-channel`               | No       | string   | "#github-actions-notification" | Slack channel to send notifications to                           |
 
 ## CD Wrapper Inputs
 
 | Input Name                  | Required | Type     | Default                         | Description                                                                 |
 |-----------------------------|----------|----------|----------------------------------|-----------------------------------------------------------------------------|
-| ecr_repo                    | Yes      | string   | -                                | Full ECR image URL to deploy (e.g., `account.dkr.ecr.region.amazonaws.com/repo-name`) |
-| eks_cluster_name            | Yes      | string   | -                                | Name of the EKS cluster to connect and deploy into                         |
-| deployment_mode             | No       | string   | "singlefile"                     | Deployment mode: `singlefile`, `filenames`, or `recursive`                 |
-| deployment_file             | No*      | string   | ./deployment.template.yaml       | Path to single manifest file (used if `deployment_mode` is `singlefile`)   |
-| deployment_files            | No*      | string   | -                                | Comma-separated list of files (used if `deployment_mode` is `filenames`)   |
-| continue_on_validation_error| No       | boolean  | false                            | Whether to continue if post-deploy validation fails                         |
-| delete_old_images           | No       | boolean  | true                             | Whether to delete older unused ECR images after deployment                 |
+| `ecr_repo`                    | Yes      | string   | -                                | Full ECR image URL to deploy (e.g., `account.dkr.ecr.region.amazonaws.com/repo-name`) |
+| `eks_cluster_name`            | Yes      | string   | -                                | Name of the EKS cluster to connect and deploy into                         |
+| `deployment_mode`             | No       | string   | "singlefile"                     | Deployment mode: `singlefile`, `filenames`, or `recursive`                 |
+| `deployment_file`             | No*      | string   | ./deployment.template.yaml       | Path to single manifest file (used if `deployment_mode` is `singlefile`)   |
+| `deployment_files`            | No*      | string   | -                                | Comma-separated list of files (used if `deployment_mode` is `filenames`)   |
+| `continue_on_validation_error`| No       | boolean  | false                            | Whether to continue if post-deploy validation fails                         |
+| `delete_old_images`           | No       | boolean  | true                             | Whether to delete older unused ECR images after deployment                 |
 
 > *Only one of `deployment_file` or `deployment_files` is required, depending on the deployment mode.
 
