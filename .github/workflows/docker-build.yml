@@ -64,10 +64,8 @@ jobs:
     name: Trigger CD Deployment (if requested)
     needs: build-and-scan
     if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.trigger_cd == 'true' }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Trigger Deploy Wrapper via repository_dispatch
-        uses: peter-evans/repository-dispatch@v3
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          event-type: deploy-wrapper
+    uses: ./.github/workflows/deploy-wrapper.yml
+    secrets:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_REGION: ${{ secrets.AWS_REGION }}
