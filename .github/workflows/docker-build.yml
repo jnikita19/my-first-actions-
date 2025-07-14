@@ -64,7 +64,7 @@ jobs:
     name: Trigger CD Deployment (if requested)
     needs: build-and-scan
     if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.trigger_cd == 'true' }}
-    uses: ./.github/workflows/deploy-wrapper.yml
+    uses: ./.github/workflows/cd-wrapper.yml
     secrets:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
