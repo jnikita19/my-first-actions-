@@ -19,7 +19,9 @@ jobs:
       AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     with:
-      image_name: ghcr.io/my-org/my-app:latest
+      image_name: ghcr.io/my-org/my-app
+      image_tag: v1.0.0  # or 'latest' 
+
       dockerfile_path: ./Dockerfile
       context: .
       build_args: "--no-cache"
