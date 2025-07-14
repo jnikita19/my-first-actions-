@@ -47,3 +47,6 @@ jobs:
       sonar_host_url: http://13.232.206.99:9000
       sonar_project_key: sonar-scan
       sonar_project_name: sonar-scan
+
+      slack-enabled: true
+      slack-channel: '#github-actions-notification'
