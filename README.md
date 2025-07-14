@@ -15,12 +15,23 @@ Welcome! This repository provides **wrapper workflows** that trigger standardize
 
 Before using the workflows, ensure the following:
 
-1. ✅ GitHub Secrets:
-   - `AWS_ACCESS_KEY_ID` – for ECR/EKS access
-   - `AWS_SECRET_ACCESS_KEY`
-   - `SLACK_WEBHOOK_URL` – for Slack notifications
-   - `SONAR_TOKEN` – for SonarQube scanning (optional but recommended)
-   - `ECR_REPO_URL` – your ECR repo (e.g., `1234567890.dkr.ecr.ap-south-1.amazonaws.com/my-app`)
+## Steps to Add a Secret
+
+1. **Go to your repository** on GitHub (e.g., `https://github.com/your-org/your-repo`)
+
+2. Click on the **"Settings"** tab in the top navigation bar
+
+3. In the left sidebar, scroll down and click **"Secrets and variables" → "Actions"**
+
+4. Click the **"New repository secret"** button
+
+5. Enter the **name** of the secret (e.g., `AWS_ACCESS_KEY_ID`) in the **Name** field
+
+6. Enter the **value** of the secret (e.g., your actual AWS access key) in the **Secret** field
+
+7. Click **"Add secret"**
+
+Repeat steps 4–7 for each of the secrets listed below.
 
 2. ✅ Your repo must have:
    - A `Dockerfile` in the root or specified path
