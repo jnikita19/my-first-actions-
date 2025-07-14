@@ -41,31 +41,23 @@ Before using the workflows, ensure the following:
 | dockerfile_path             | No       | string   | ./Dockerfile    | Path to the Dockerfile                                                     |
 | context                     | No       | string   | .               | Docker build context directory                                              |
 | build_args                  | No       | string   | --no-cache      | Extra arguments to pass to Docker build                                    |
-
 | run_gitleaks                | No       | boolean  | true            | Enable Gitleaks scan                                                       |
 | gitleaks_fetch_depth        | No       | number   | 1               | Git fetch depth for Gitleaks (**0 = all commits**, **1 = most recent**)   |
 | continue_on_gitleaks_error | No       | boolean  | false           | Whether to continue pipeline if Gitleaks scan fails                        |
-
 | run_owasp                   | No       | boolean  | true            | Enable OWASP dependency check                                              |
 | continue_on_owasp_error     | No       | boolean  | false           | Whether to continue pipeline if OWASP scan fails                           |
-
 | run_pytest                  | No       | boolean  | true            | Run tests using Pytest                                                     |
 | continue_on_pytest_error    | No       | boolean  | true            | Whether to continue pipeline if tests fail                                 |
-
 | run_trivy                   | No       | boolean  | true            | Enable Trivy scan for vulnerabilities                                      |
 | continue_on_trivy_error     | No       | boolean  | false           | Whether to continue pipeline if Trivy scan fails                           |
-
 | image_size_threshold_mb     | No       | number   | 200             | Maximum allowed image size in MB                                           |
 | continue_on_size_check_error| No       | boolean  | false           | Whether to continue pipeline if image exceeds size                         |
-
 | push_to_ecr                 | No       | boolean  | true            | Whether to push the image to AWS ECR                                       |
 | ecr_repository              | Yes*     | string   | -               | ECR repository name (required if `push_to_ecr` is true)                    |
-
 | run_sonar                   | No       | boolean  | true            | Whether to run SonarQube static analysis                                   |
 | sonar_host_url              | Yes*     | string   | -               | SonarQube server URL (required if `run_sonar` is true)                     |
 | sonar_project_key           | Yes*     | string   | -               | SonarQube project key                                                      |
 | sonar_project_name          | Yes*     | string   | -               | SonarQube project name                                                     |
-
 | slack-enabled               | No       | boolean  | true            | Whether to send Slack notifications                                        |
 | slack-channel               | No       | string   | "#github-actions-notification" | Slack channel to send notifications to                           |
 
