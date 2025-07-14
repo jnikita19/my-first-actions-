@@ -2,6 +2,8 @@ name: Deploy Wrapper
 
 on:
   workflow_dispatch:
+  repository_dispatch:
+    types: [deploy-wrapper]
 
 jobs:
   deploy:
