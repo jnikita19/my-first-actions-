@@ -3,14 +3,20 @@ name: Docker CI Pipeline
 on:
   push:
     branches:
-      -main
+      - main
   workflow_dispatch:
+    inputs:
+      trigger_cd:
+        description: "Do you want to run CD after CI?"
+        required: false
+        default: "false"
   schedule:
     - cron: '20 8 * * *'
 
 jobs:
   build-and-scan:
     uses: AmanjotSinghSaini-int/ci-templates/.github/workflows/docker-build.yml@main
+
     secrets:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -18,37 +24,50 @@ jobs:
       AWS_REGION: ${{ secrets.AWS_REGION }}
       AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
     with:
       image_name: ghcr.io/my-org/my-app
-      image_tag: v1.0.0  # or 'latest' 
-
+      image_tag: v1.0.0 #or latest
+      
       dockerfile_path: ./Dockerfile
       context: .
       build_args: "--no-cache"
-
+      
       run_gitleaks: true
       gitleaks_fetch_depth: 1
       continue_on_gitleaks_error: false
-
+      
       run_owasp: true
       continue_on_owasp_error: false
-
+      
       run_pytest: true
       continue_on_pytest_error: true
-
+      
       run_trivy: true
       continue_on_trivy_error: false
-
-      image_size_threshold_mb: 200        
-      continue_on_size_check_error: false 
-
+      
+      image_size_threshold_mb: 200
+      continue_on_size_check_error: false
+      
       push_to_ecr: true
       ecr_repository: image-from-github
-
+      
       run_sonar: true
       sonar_host_url: http://13.232.206.99:9000
       sonar_project_key: sonar-scan
       sonar_project_name: sonar-scan
-
+      
       slack-enabled: true
       slack-channel: '#github-actions-notification'
+
+  trigger-cd:
+    name: Trigger CD Deployment (if requested)
+    needs: build-and-scan
+    if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.trigger_cd == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Deploy Wrapper
+        uses: peter-evans/workflow-dispatch@v1
+        with:
+          workflow: Deploy Wrapper  
+          token: ${{ secrets.GITHUB_TOKEN }}
