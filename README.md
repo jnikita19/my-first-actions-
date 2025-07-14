@@ -138,6 +138,106 @@ Make sure your repository includes the following:
 
 ---
 
+## 📦 How to Use
+
+To use the CI/CD pipeline with the provided **wrapper workflows**, follow these steps:
+
+---
+
+### 📁 Folder Structure Requirement
+
+Ensure your repository contains the following structure:
+
+```
+your-repo/
+├── .github/
+│   └── workflows/
+│       ├── ci-wrapper.yml
+│       └── cd-wrapper.yml
+```
+
+- Create a `.github/workflows/` folder at the **root of your repository** if it doesn't already exist.
+- Place both the CI and CD wrapper workflow files (`ci-wrapper.yml` and `cd-wrapper.yml`) inside this folder.
+
+---
+
+### 🚀 How the Pipeline Triggers
+
+The pipeline can be triggered in **three ways**:
+
+#### 1. **On Push**
+
+```yaml
+on:
+  push:
+    branches:
+      - main
+```
+
+- Every time you push code to the `main` branch, the pipeline will automatically trigger.
+- No manual action is needed.
+
+---
+
+#### 2. **Manual Trigger via Workflow Dispatch**
+
+```yaml
+on:
+  workflow_dispatch:
+    inputs:
+      trigger_cd:
+        description: "Do you want to run CD after CI?"
+        required: false
+        default: "false"
+```
+
+To run manually:
+
+1. Go to the **Actions** tab on your GitHub repository.
+2. Click on the desired workflow (`ci-wrapper` or `cd-wrapper`).
+3. Click **"Run workflow"**.
+4. Provide any inputs if required (e.g., `trigger_cd` toggle).
+5. Click **Run** to start the workflow manually.
+
+---
+
+#### 3. **Scheduled Run (Cron Job)**
+
+```yaml
+on:
+  schedule:
+    - cron: '20 8 * * *'  # Runs every day at 08:20 AM UTC
+```
+
+- The workflow will automatically run at the defined time.
+- No user action is needed after setup.
+
+---
+
+### 🔍 Monitoring the Pipeline
+
+After triggering the workflow:
+
+1. Open the **Actions** tab in your GitHub repository.
+2. Click on the workflow run (CI or CD) you want to inspect.
+3. Click on any job or step to expand and **view logs** in real time or post-run.
+
+---
+
+### 📁 Viewing Artifacts
+
+If the workflow generates artifacts (e.g., scan reports, test results, deployment files):
+
+1. Open the **Actions** tab.
+2. Select the completed run.
+3. Scroll to the bottom to the **Artifacts** section.
+4. Click the artifact name to **download** it.
+
+---
+
+> ✅ **Make sure all required `secrets` and `inputs` are configured correctly in your repository settings for the pipeline to work successfully.**
+
+
 ## 🚀 Usage
 
 ### ✅ CI Wrapper
