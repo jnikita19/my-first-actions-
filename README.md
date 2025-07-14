@@ -30,6 +30,42 @@ Before using the workflows, ensure the following:
 
 ---
 
+# Inputs
+
+## Table 1: CI Wrapper Inputs
+
+| Input Name       | Required | Type     | Default       | Description                                                                  |
+|------------------|----------|----------|---------------|------------------------------------------------------------------------------|
+| trigger_cd       | No       | string   | "false"       | Controls whether to trigger CD pipeline after CI ("true" or "false")        |
+| sonar_enabled    | No       | boolean  | true          | Whether to run SonarQube code analysis                                       |
+| push_to_ecr      | No       | boolean  | true          | If true, image will be pushed to ECR after scanning                          |
+| slack_notify     | No       | boolean  | true          | Enables Slack notifications if SLACK_WEBHOOK_URL is provided                |
+| project_path     | No       | string   | "."           | Path to the Dockerfile and source code                                       |
+| dockerfile_name  | No       | string   | "Dockerfile"  | Name of the Dockerfile to use                                                |
+
+## Table 2: CD Wrapper Inputs
+
+| Input Name       | Required | Type     | Default                         | Description                                                                  |
+|------------------|----------|----------|----------------------------------|------------------------------------------------------------------------------|
+| image_tag        | Yes      | string   | -                                | Docker image tag to deploy to the Kubernetes cluster                         |
+| k8s_namespace    | No       | string   | "default"                        | Kubernetes namespace to deploy into                                          |
+| deployment_file  | No       | string   | "k8s/deployment.template.yaml"   | Path to deployment manifest template                                         |
+| slack_notify     | No       | boolean  | true                             | Enables Slack notification after successful deployment                       |
+| validate_deploy  | No       | boolean  | true                             | Runs post-deployment validation to ensure pods are running correctly         |
+
+## Table 3: Required GitHub Secrets
+
+| Secret Name           | Required | Description                                                          |
+|------------------------|----------|----------------------------------------------------------------------|
+| AWS_ACCESS_KEY_ID      | Yes      | AWS key for ECR and Kubernetes access                                |
+| AWS_SECRET_ACCESS_KEY  | Yes      | AWS secret for ECR and Kubernetes access                             |
+| ECR_REPO_URL           | Yes      | Full ECR repo URL where Docker images are pushed or pulled from      |
+| SLACK_WEBHOOK_URL      | No       | Slack webhook for pipeline alerts                                    |
+| SONAR_TOKEN            | No       | Token for SonarQube static code analysis (if `sonar_enabled` is true)|
+
+
+---
+
 ## 🚀 Usage
 
 ### ✅ CI Wrapper
