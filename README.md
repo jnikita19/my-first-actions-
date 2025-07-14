@@ -61,15 +61,19 @@ Before using the workflows, ensure the following:
 | slack-enabled               | No       | boolean  | true            | Whether to send Slack notifications                                        |
 | slack-channel               | No       | string   | "#github-actions-notification" | Slack channel to send notifications to                           |
 
-## Table 2: CD Wrapper Inputs
+## CD Wrapper Inputs
 
-| Input Name       | Required | Type     | Default                         | Description                                                                  |
-|------------------|----------|----------|----------------------------------|------------------------------------------------------------------------------|
-| image_tag        | Yes      | string   | -                                | Docker image tag to deploy to the Kubernetes cluster                         |
-| k8s_namespace    | No       | string   | "default"                        | Kubernetes namespace to deploy into                                          |
-| deployment_file  | No       | string   | "k8s/deployment.template.yaml"   | Path to deployment manifest template                                         |
-| slack_notify     | No       | boolean  | true                             | Enables Slack notification after successful deployment                       |
-| validate_deploy  | No       | boolean  | true                             | Runs post-deployment validation to ensure pods are running correctly         |
+| Input Name                  | Required | Type     | Default                         | Description                                                                 |
+|-----------------------------|----------|----------|----------------------------------|-----------------------------------------------------------------------------|
+| ecr_repo                    | Yes      | string   | -                                | Full ECR image URL to deploy (e.g., `account.dkr.ecr.region.amazonaws.com/repo-name`) |
+| eks_cluster_name            | Yes      | string   | -                                | Name of the EKS cluster to connect and deploy into                         |
+| deployment_mode             | No       | string   | "singlefile"                     | Deployment mode: `singlefile`, `filenames`, or `recursive`                 |
+| deployment_file             | No*      | string   | ./deployment.template.yaml       | Path to single manifest file (used if `deployment_mode` is `singlefile`)   |
+| deployment_files            | No*      | string   | -                                | Comma-separated list of files (used if `deployment_mode` is `filenames`)   |
+| continue_on_validation_error| No       | boolean  | false                            | Whether to continue if post-deploy validation fails                         |
+| delete_old_images           | No       | boolean  | true                             | Whether to delete older unused ECR images after deployment                 |
+
+> *Only one of `deployment_file` or `deployment_files` is required, depending on the deployment mode.
 
 ## Table 3: Required GitHub Secrets
 
