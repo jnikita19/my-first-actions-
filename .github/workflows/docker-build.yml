@@ -66,8 +66,8 @@ jobs:
     if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.trigger_cd == 'true' }}
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger Deploy Wrapper
-        uses: peter-evans/workflow-dispatch@v1
+      - name: Trigger Deploy Wrapper via repository_dispatch
+        uses: peter-evans/repository-dispatch@v3
         with:
-          workflow: Deploy Wrapper  
           token: ${{ secrets.GITHUB_TOKEN }}
+          event-type: deploy-wrapper
