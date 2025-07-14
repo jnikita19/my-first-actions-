@@ -13,31 +13,63 @@ Welcome! This repository provides **wrapper workflows** that trigger standardize
 
 ## 🛠️ Prerequisites
 
-Before using the workflows, ensure the following:
+Before using the CI/CD workflows, ensure the following setup is complete.
 
-## Steps to Add a Secret
+---
 
-1. **Go to your repository** on GitHub (e.g., `https://github.com/your-org/your-repo`)
+### 🔐 GitHub Secrets Configuration
 
-2. Click on the **"Settings"** tab in the top navigation bar
-
-3. In the left sidebar, scroll down and click **"Secrets and variables" → "Actions"**
-
+1. Go to your repository (e.g., `https://github.com/your-org/your-repo`)
+2. Click on the **"Settings"** tab at the top
+3. In the left sidebar, go to **"Secrets and variables" → "Actions"**
 4. Click the **"New repository secret"** button
-
-5. Enter the **name** of the secret (e.g., `AWS_ACCESS_KEY_ID`) in the **Name** field
-
-6. Enter the **value** of the secret (e.g., your actual AWS access key) in the **Secret** field
-
+5. Enter the **secret name** (e.g., `AWS_ACCESS_KEY_ID`)
+6. Enter the **secret value** (your actual AWS access key, token, etc.)
 7. Click **"Add secret"**
+8. Repeat steps 4–7 for each secret required by the pipeline
 
-Repeat steps 4–7 for each of the secrets listed below.
+> 🔎 See [Secrets Table](#table-3-required-github-secrets) for a full list.
 
-2. ✅ Your repo must have:
-   - A `Dockerfile` in the root or specified path
-   - Kubernetes manifests (deployment/service/ingress) in a `k8s/` directory (for CD)
-   - SonarQube project setup (if enabled)
-   - Python/Node/Java/etc. dependencies declared (e.g., `requirements.txt`, `package.json`, `pom.xml`)
+---
+
+### 📁 Repository Requirements
+
+Make sure your repository includes the following:
+
+- ✅ A `Dockerfile` in the root or specified path
+- ✅ Kubernetes manifest files:
+  - For single-file mode: `deployment.template.yaml`
+  - For multi-file mode: `deployment.yaml`, `service.yaml`, `ingress.yaml` inside a `k8s/` folder
+- ✅ Dependency files for your tech stack:
+  - Python: `requirements.txt`
+  - Node.js: `package.json`
+  - Java: `pom.xml`, `build.gradle`, etc.
+- ✅ (Optional) A SonarQube project already created if `run_sonar` is enabled  
+  🔗 [Create a SonarQube project](https://docs.sonarsource.com/sonarqube/latest/project-administration/adding-a-project/)
+- ✅ (Optional) Slack channel created and Slack webhook URL generated (if `slack-enabled` is true)  
+  🔗 [Set up a Slack webhook](https://api.slack.com/messaging/webhooks)
+
+---
+
+### 🧾 Permissions & Access
+
+- GitHub Actions must be **enabled** for the repository  
+  🔗 [GitHub Actions documentation](https://docs.github.com/en/actions/using-workflows/about-workflows)
+- User running the workflow must have **write access** to the repo
+- AWS IAM user/role used must have:
+  - ECR access permissions:  
+    🔗 [Set up permissions for Amazon ECR](https://docs.aws.amazon.com/AmazonECR/latest/userguide/ecr_managed_policies.html)
+  - EKS cluster access:  
+    🔗 [Configure access to EKS using IAM](https://docs.aws.amazon.com/eks/latest/userguide/add-user-role.html)
+- (Optional) Slack webhook must be allowed to post to the selected channel
+- (Optional) SonarQube token must have permission to execute analysis on the selected project
+
+---
+
+### 🛡️ Recommendations (Optional but Useful)
+
+- Enable branch protection rules to enforce successful CI before merging  
+  🔗 [Protect branches in GitHub](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/defining-the-mergeability-of-pull-requests/about-protected-branches)
 
 ---
 
