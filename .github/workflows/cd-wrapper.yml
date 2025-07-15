@@ -5,7 +5,7 @@ on:
 
 jobs:
   deploy:
-    uses: AmanjotSinghSaini-int/ci-templates/.github/workflows/cd-template.yml@main
+    uses: AmanjotSinghSaini-int/cicd-templates/.github/workflows/cd-template.yml@main
     with:
       ecr_repo: 370389955750.dkr.ecr.ap-south-1.amazonaws.com/image-from-github
       eks_cluster_name: github-actions-deployment
