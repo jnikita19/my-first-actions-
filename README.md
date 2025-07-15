@@ -232,4 +232,22 @@ If the workflow generates artifacts (e.g., scan reports, test results, deploymen
 
 > ✅ **Make sure all required `secrets` and `inputs` are configured correctly in your repository settings for the pipeline to work successfully.**
 
+---
+
+## CI Pipeline
+
 <img width="1437" height="566" alt="Image" src="https://github.com/user-attachments/assets/b024690b-36df-4376-8963-500e17b15215" />
+
+## Artifacts
+
+<img width="1432" height="512" alt="Image" src="https://github.com/user-attachments/assets/323bc181-1d55-49f1-aa9e-d82b48ec84a7" />
+
+## CD Pipeline
+
+<img width="1455" height="438" alt="Image" src="https://github.com/user-attachments/assets/766d154e-2f24-4c07-b387-6672367962e7" />
+
+## Slack Notifications
+
+<img width="1393" height="757" alt="Image" src="https://github.com/user-attachments/assets/374e5259-b65e-4690-ad28-09e81f21ca8a" />
+
+
