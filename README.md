@@ -7,7 +7,20 @@ Welcome! This repository provides **wrapper workflows** that trigger standardize
 ## 📦 What’s Inside
 
 - `ci-wrapper.yml` — triggers Docker Build + Security Scans (CI)
+  - Gitleaks secrets scanning
+  - Trivy vulnerability scanning
+  - OWASP Dependency Check
+  - SonarQube analysis
+  - Pytest (if configured)
+  - Image Size Validator
+  - ECR push (optional)
+  - Slack alerts + artifact uploads
+
 - `cd-wrapper.yml` — triggers deployment to EKS using kubectl (CD)
+  - Pulls latest ECR image
+  - Applies manifests to EKS (supports multiple modes)
+  - Validates rollout with retry logic
+  - Prunes old & untagged images (optional)
 
 ---
 
