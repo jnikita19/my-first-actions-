@@ -28,7 +28,7 @@ Before using the CI/CD workflows, ensure the following setup is complete.
 7. Click **"Add secret"**
 8. Repeat steps 4–7 for each secret required by the pipeline
 
-> 🔎 See [Secrets Table](#table-3-required-github-secrets) for a full list.
+> 🔎 See [Secrets Table](#required-github-secrets) for a full list.
 
 ---
 
@@ -175,6 +175,7 @@ on:
 ```
 
 - Every time you push code to the `main` branch, the pipeline will automatically trigger.
+- branch name can be changed according to the usage
 - No manual action is needed.
 
 ---
@@ -196,8 +197,7 @@ To run manually:
 1. Go to the **Actions** tab on your GitHub repository.
 2. Click on the desired workflow (`ci-wrapper` or `cd-wrapper`).
 3. Click **"Run workflow"**.
-4. Provide any inputs if required (e.g., `trigger_cd` toggle).
-5. Click **Run** to start the workflow manually.
+4. Click **Run** to start the workflow manually.
 
 ---
 
@@ -236,38 +236,3 @@ If the workflow generates artifacts (e.g., scan reports, test results, deploymen
 ---
 
 > ✅ **Make sure all required `secrets` and `inputs` are configured correctly in your repository settings for the pipeline to work successfully.**
-
-
-## 🚀 Usage
-
-### ✅ CI Wrapper
-
-```yaml
-# .github/workflows/ci-wrapper.yml
-
-name: Docker CI Pipeline
-
-on:
-  push:
-    branches: [main]
-  workflow_dispatch:
-    inputs:
-      trigger_cd:
-        description: 'Do you want to run CD after CI?'
-        required: false
-        default: 'false'
-  schedule:
-    - cron: '20 8 * * *' # daily CI run
-
-jobs:
-  build-and-scan:
-    uses: AmanjotSinghSaini-int/ci-templates/.github/workflows/docker-build.yml@main
-    with:
-      sonar_enabled: true
-      push_to_ecr: true
-    secrets:
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-      ECR_REPO_URL: ${{ secrets.ECR_REPO_URL }}
