@@ -231,3 +231,5 @@ If the workflow generates artifacts (e.g., scan reports, test results, deploymen
 ---
 
 > ✅ **Make sure all required `secrets` and `inputs` are configured correctly in your repository settings for the pipeline to work successfully.**
+
+<img width="1437" height="566" alt="Image" src="https://github.com/user-attachments/assets/b024690b-36df-4376-8963-500e17b15215" />
