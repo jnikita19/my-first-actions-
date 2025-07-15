@@ -185,11 +185,6 @@ on:
 ```yaml
 on:
   workflow_dispatch:
-    inputs:
-      trigger_cd:
-        description: "Do you want to run CD after CI?"
-        required: false
-        default: "false"
 ```
 
 To run manually:
