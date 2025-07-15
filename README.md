@@ -1,6 +1,6 @@
 # 🚀 GitHub Actions CI/CD Wrapper Workflows
 
-Welcome! This repository provides **wrapper workflows** that trigger standardized CI and CD reusable workflows hosted in [ci-templates](https://github.com/AmanjotSinghSaini-int/ci-templates). These wrappers make it easy for your teams to implement secure, consistent CI/CD pipelines with minimal setup.
+Welcome! This repository provides **wrapper workflows** that trigger standardized CI and CD reusable workflows hosted in [ci-templates](https://github.com/AmanjotSinghSaini-int/cicd-templates). These wrappers make it easy for your teams to implement secure, consistent CI/CD pipelines with minimal setup.
 
 ---
 
