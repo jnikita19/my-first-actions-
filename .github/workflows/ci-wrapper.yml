@@ -27,7 +27,7 @@ jobs:
       build_args: "--no-cache"
 
       run_gitleaks: true
-      gitleaks_fetch_depth: 0
+      gitleaks_fetch_depth: 1
       continue_on_gitleaks_error: false
 
       run_owasp: true
