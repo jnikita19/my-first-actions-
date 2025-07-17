@@ -1,0 +1,45 @@
+name: Update AMI and Roll ASG
+
+on:
+  workflow_dispatch:
+
+jobs:
+  update-ami:
+    uses: AmanjotSinghSaini-int/cicd-templates/.github/workflows/ami-update-reusable.yml@main
+    with:
+      # --- AWS & Launch Template Info ---
+      region: ap-south-1
+      launch_template_id: lt-0123456789abcdef0
+      new_ami_id: ami-0123456789abcdef0
+      asg_name: my-auto-scaling-group
+      aws_iam_role_arn: arn:aws:iam::123456789012:role/github-actions-role
+
+      # --- ASG Capacity ---
+      update_asg_capacity: true
+      min_size: 1
+      max_size: 3
+      desired_capacity: 2
+      default_cooldown: 300
+
+      # --- ASG Health Check ---
+      update_asg_health_check: true
+      health_check_type: EC2
+      health_check_grace_period: 300
+
+      # --- Instance Refresh ---
+      enable_instance_refresh: true
+      instance_refresh_strategy: Rolling
+      instance_refresh_min_healthy_percentage: 90
+      instance_refresh_instance_warmup: 300
+      instance_refresh_auto_rollback: true
+      instance_refresh_checkpoints: ""
+      instance_refresh_skip_matching: false
+
+      # --- ASG Suspend/Resume (optional) ---
+      suspend_asg_processes: false
+      processes_to_suspend: ""
+      resume_asg_processes: false
+      processes_to_resume: ""
+
+      # --- Instance Protection (optional) ---
+      enable_instance_protection: false
