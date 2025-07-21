@@ -49,6 +49,8 @@ jobs:
       sonar_host_url: http://15.206.89.140:9000
       sonar_project_key: sonar-scan
       sonar_project_name: sonar-scan
+      fail_on_quality_gate: true
+      min_coverage_percent: 70
 
       slack-enabled: true
       slack-channel: '#github-actions-notification'
