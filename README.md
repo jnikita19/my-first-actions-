@@ -42,7 +42,7 @@ Before using the CI/CD workflows, ensure the following setup is complete.
 7. Click **"Add secret"**
 8. Repeat steps 4–7 for each secret required by the pipeline
 
-> 🔎 See [Secrets Table](#required-github-secrets) for a full list.
+> See [Secrets Table](#required-github-secrets) for a full list.
 
 ---
 
@@ -50,17 +50,17 @@ Before using the CI/CD workflows, ensure the following setup is complete.
 
 Make sure your repository includes the following:
 
-- ✅ A `Dockerfile` in the root or specified path
-- ✅ Kubernetes manifest files:
+- A `Dockerfile` in the root or specified path
+- Kubernetes manifest files:
   - For single-file mode: `deployment.template.yaml`
   - For multi-file mode: `deployment.yaml`, `service.yaml`, `ingress.yaml` inside a `k8s/` folder
-- ✅ Dependency files for your tech stack:
+- Dependency files for your tech stack:
   - Python: `requirements.txt`
   - Node.js: `package.json`
   - Java: `pom.xml`, `build.gradle`, etc.
-- ✅ (Optional) A SonarQube project already created if `run_sonar` is enabled  
+- (Optional) A SonarQube project already created if `run_sonar` is enabled  
   🔗 [Create a SonarQube project](https://docs.sonarsource.com/sonarqube/latest/project-administration/adding-a-project/)
-- ✅ (Optional) Slack channel created and Slack webhook URL generated (if `slack-enabled` is true)  
+- (Optional) Slack channel created and Slack webhook URL generated (if `slack-enabled` is true)  
   🔗 [Set up a Slack webhook](https://api.slack.com/messaging/webhooks)
 
 ---
@@ -244,7 +244,7 @@ If the workflow generates artifacts (e.g., scan reports, test results, deploymen
 
 ---
 
-> ✅ **Make sure all required `secrets` and `inputs` are configured correctly in your repository settings for the pipeline to work successfully.**
+> **Make sure all required `secrets` and `inputs` are configured correctly in your repository settings for the pipeline to work successfully.**
 
 ---
 
