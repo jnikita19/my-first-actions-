@@ -1,36 +1,37 @@
-# 🚀 GitHub Actions CI/CD Wrapper Workflows
+# GitHub Actions CI/CD Wrapper Workflows
 
 Welcome! This repository provides **wrapper workflows** that trigger standardized CI and CD reusable workflows hosted in [cicd-templates](https://github.com/AmanjotSinghSaini-int/cicd-templates). These wrappers make it easy for your teams to implement secure, consistent CI/CD pipelines with minimal setup.
 
 ---
 
-## 📦 What’s Inside
+## What’s Inside
 
 - `ci-wrapper.yml` — triggers Docker Build + Security Scans (CI)
   - Gitleaks secrets scanning
   - Trivy vulnerability scanning
   - OWASP Dependency Check
   - SonarQube analysis
-  - Pytest (if configured)
+  - Pytest
   - Image Size Validator
-  - ECR push (optional)
-  - Slack alerts + artifact uploads
+  - ECR push
+  - Slack alerts
+  - Artifact uploads
 
 - `cd-wrapper.yml` — triggers deployment to EKS using kubectl (CD)
   - Pulls latest ECR image
   - Applies manifests to EKS (supports multiple modes)
   - Validates rollout with retry logic
-  - Prunes old & untagged images (optional)
+  - Prunes old & untagged images 
 
 ---
 
-## 🛠️ Prerequisites
+## Prerequisites
 
 Before using the CI/CD workflows, ensure the following setup is complete.
 
 ---
 
-### 🔐 GitHub Secrets Configuration
+### GitHub Secrets Configuration
 
 1. Go to your repository (e.g., `https://github.com/your-org/your-repo`)
 2. Click on the **"Settings"** tab at the top
@@ -45,7 +46,7 @@ Before using the CI/CD workflows, ensure the following setup is complete.
 
 ---
 
-### 📁 Repository Requirements
+### Repository Requirements
 
 Make sure your repository includes the following:
 
@@ -64,7 +65,7 @@ Make sure your repository includes the following:
 
 ---
 
-### 🧾 Permissions & Access
+### Permissions & Access
 
 - GitHub Actions must be **enabled** for the repository  
   🔗 [GitHub Actions documentation](https://docs.github.com/en/actions/using-workflows/about-workflows)
@@ -79,7 +80,7 @@ Make sure your repository includes the following:
 
 ---
 
-### 🛡️ Recommendations (Optional but Useful)
+### Recommendations (Optional but Useful)
 
 - Enable branch protection rules to enforce successful CI before merging  
   🔗 [Protect branches in GitHub](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/defining-the-mergeability-of-pull-requests/about-protected-branches)
@@ -114,8 +115,8 @@ Make sure your repository includes the following:
 | `sonar_host_url`              | Yes*     | string   | -               | SonarQube server URL (required if `run_sonar` is true)                     |
 | `sonar_project_key`           | Yes*     | string   | -               | SonarQube project key                                                      |
 | `sonar_project_name`          | Yes*     | string   | -               | SonarQube project name                                                     |
-| `slack-enabled`               | No       | boolean  | true            | Whether to send Slack notifications                                        |
-| `slack-channel`               | No       | string   | "#github-actions-notification" | Slack channel to send notifications to                           |
+| `slack_enabled`               | No       | boolean  | true            | Whether to send Slack notifications                                        |
+| `slack_channel`               | No       | string   | "#github-actions-notification" | Slack channel to send notifications to                           |
 
 ## CD Wrapper Inputs
 
@@ -144,20 +145,20 @@ Make sure your repository includes the following:
 
 > **Note:**  
 > `SLACK_WEBHOOK_URL` and `SONAR_TOKEN` are optional. They are only required if:
-> - `slack-enabled: true` is set in your workflow inputs (for Slack notifications), or  
+> - `slack_enabled: true` is set in your workflow inputs (for Slack notifications), or  
 > - `run_sonar: true` is enabled (for SonarQube static analysis).  
 > If these secrets are not provided while the respective features are enabled, the pipeline may fail at runtime.
 
 
 ---
 
-## 📦 How to Use
+## How to Use
 
 To use the CI/CD pipeline with the provided **wrapper workflows**, follow these steps:
 
 ---
 
-### 📁 Folder Structure Requirement
+### Folder Structure Requirement
 
 Ensure your repository contains the following structure:
 
@@ -174,7 +175,7 @@ your-repo/
 
 ---
 
-### 🚀 How the Pipeline Triggers
+### How the Pipeline Triggers
 
 The pipeline can be triggered in **three ways**:
 
@@ -222,7 +223,7 @@ on:
 
 ---
 
-### 🔍 Monitoring the Pipeline
+### Monitoring the Pipeline
 
 After triggering the workflow:
 
@@ -232,7 +233,7 @@ After triggering the workflow:
 
 ---
 
-### 📁 Viewing Artifacts
+### Viewing Artifacts
 
 If the workflow generates artifacts (e.g., scan reports, test results, deployment files):
 
