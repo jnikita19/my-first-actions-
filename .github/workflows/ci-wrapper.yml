@@ -52,5 +52,5 @@ jobs:
       fail_on_quality_gate: true
       min_coverage_percent: 70
 
-      slack-enabled: true
-      slack-channel: '#github-actions-notification'
+      slack_enabled: true
+      slack_channel: '#github-actions-notification'
