@@ -103,10 +103,10 @@ Make sure your repository includes the following:
 
 | Input Name                  | Required | Type     | Default         | Description                                                                 |
 |-----------------------------|----------|----------|-----------------|-----------------------------------------------------------------------------|
-| `image_name`                  | Yes      | string   | -               | Full image name (e.g., `ghcr.io/my-org/my-app`)                            |
-| `image_tag`                   | Yes      | string   | -               | Tag for the built image (e.g., `latest`, `v1.0.0`)                          |
+| `docker_image_name`                  | Yes      | string   | -               | Full image name (e.g., `ghcr.io/my-org/my-app`)                            |
+| `docker_image_tag`                   | Yes      | string   | -               | Tag for the built image (e.g., `latest`, `v1.0.0`)                          |
 | `dockerfile_path`             | No       | string   | ./Dockerfile    | Path to the Dockerfile                                                     |
-| `context`                     | No       | string   | .               | Docker build context directory                                              |
+| `docker_context`                     | No       | string   | .               | Docker build context directory                                              |
 | `build_args`                  | No       | string   | --no-cache      | Extra arguments to pass to Docker build                                    |
 | `run_gitleaks`                | No       | boolean  | true            | Enable Gitleaks scan                                                       |
 | `gitleaks_fetch_depth`        | No       | number   | 1               | Git fetch depth for Gitleaks (**0 = all commits**, **1 = most recent**)   |
