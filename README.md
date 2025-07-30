@@ -4,6 +4,16 @@ Welcome! This repository provides **wrapper workflows** that trigger standardize
 
 ---
 
+## ☁️ Cloud Provider Compatibility
+
+| Cloud Provider | Supported |
+|----------------|-----------|
+| ![AWS](https://img.shields.io/badge/AWS-%23FF9900?logo=amazonaws&logoColor=white&style=flat) | ✅ |
+| ![Azure](https://img.shields.io/badge/Azure-%230072C6?logo=microsoftazure&logoColor=white&style=flat) | ❌ *(Planned)* |
+| ![GCP](https://img.shields.io/badge/GCP-%234285F4?logo=googlecloud&logoColor=white&style=flat) | ❌ *(Planned)* |
+
+---
+
 ## What’s Inside
 
 - `ci-wrapper.yml` — triggers Docker Build + Security Scans (CI)
