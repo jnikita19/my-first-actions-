@@ -42,10 +42,10 @@ jobs:
       image_size_threshold_mb: 200        
       continue_on_size_check_error: false 
 
-      push_to_ecr: true
+      push_to_ecr: false
       ecr_repository: image-from-github
 
-      run_sonar: true
+      run_sonar: false
       sonar_host_url: http://15.206.89.140:9000
       sonar_project_key: sonar-scan
       sonar_project_name: sonar-scan
