@@ -45,7 +45,7 @@ jobs:
       push_to_ecr: true
       ecr_repository: image-from-github
 
-      run_sonar: true
+      run_sonar: false
       sonar_host_url: http://localhost:9000
       sonar_project_key: sonar-scan
       sonar_project_name: sonar-scan
