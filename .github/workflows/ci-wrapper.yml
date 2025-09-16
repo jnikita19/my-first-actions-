@@ -10,7 +10,7 @@ on:
 
 jobs:
   build-and-scan:
-    uses: jnikita19/cicd-templates/.github/workflows/ci-template.yml@main@main
+    uses: jnikita19/cicd-templates/.github/workflows/ci-template.yml@main
     secrets:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
